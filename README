@@ -1,0 +1,5 @@
+Couchy
+
+Couchy is a simple frontend on top of CouchDB with the aim of allowing a designer to specify the schema of a CouchDB document using plain old html.
+
+Neat concept, huh?!
