@@ -7,11 +7,10 @@ describe TemplateMap do
   before(:each) do
     rio('demo_template.html') >> (template ||= "")
     @template = TemplateMap.new(:template => template, :record => {:title => 'yo ho ho!', :body => 'and a merry ho ho', :date => '2007'})
-    puts @template.parsed
   end
   
   it "should be ok" do
-    Hpricot(@template.parsed)/"#title".should == 'yo ho ho!'
+    (Hpricot(@template.parsed)/"#title").inner_html.should == 'yo ho ho!'
   end
 
   it "should be ok" do

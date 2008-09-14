@@ -1,0 +1,9 @@
+<% if @pages.empty? %>
+  <p>Doesn't look like you've got any pages.</p>
+<% else %>
+  <ul>
+  <% @pages.each do |page| %>
+    <li><a href="/editor/<%= page['_id'] %>"><%= page['title'] %></a></li>
+  <% end %>
+  </ul>
+<% end %>
