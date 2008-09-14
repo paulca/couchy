@@ -13,7 +13,7 @@ get '/' do
 end
 
 get '/pages' do
-  @pages = db.view('couchy/default')['rows'].map { |r| r['value'] }
+  @pages = db.view('couchy/default')['rows'].map { |r| OpenStruct.new(r['value']) }
   erb :pages
 end
 
