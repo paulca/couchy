@@ -3,7 +3,11 @@
 <% else %>
   <ul>
   <% @pages.each do |page| %>
-    <li><a href="/edit/<%= page._id %>"><%= page.title || 'untitled' %></a> <a href="/delete/<%= page._id %>">delete</a></li>
+    <li>
+      <a href="/edit/<%= page._id %>"><%= page.title || 'untitled' %></a>
+      <a href="/pages/<%= page._id %>">show</a>
+      <a href="/delete/<%= page._id %>">delete</a>
+    </li>
   <% end %>
   </ul>
 <% end %>

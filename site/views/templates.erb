@@ -1,0 +1,11 @@
+<h1>Templates</h1>
+
+<% if @templates.empty? %>
+  <p>No templates</p>
+<% else %>
+  <ul>
+    <% @templates.each do |template| %>
+      <li><%= template.filename %></li>
+    <% end %>
+  </ul>
+<% end %>

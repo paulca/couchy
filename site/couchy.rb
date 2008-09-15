@@ -2,6 +2,8 @@ require 'rubygems'
 require 'sinatra'
 require 'couchrest'
 require 'ostruct'
+require 'rio'
+require 'template_map'
 
 def db
   connection = CouchRest.new('http://localhost:5984')
@@ -17,6 +19,17 @@ get '/pages' do
   erb :pages
 end
 
+get '/pages/:id' do
+  @page = OpenStruct.new(db.get(params[:id]))
+  rio("templates/#{@page.template}") >> (template ||= "")
+  TemplateMap.new(:template => template, :record => {:body => @page.body, :title => @page.title}).parsed
+end
+
+get '/templates' do
+  @templates = rio('templates')
+  erb :templates
+end
+
 get '/edit/:id' do
   @page = OpenStruct.new(db.get(params[:id]))
   erb :edit
@@ -24,7 +37,7 @@ end
 
 post '/page/:id' do
   page = OpenStruct.new(db.get(params[:id]))
-  @page = db.save({"_id" => params[:id], "_rev" => page._rev, 'title' => params[:title], 'body' => params[:body]})
+  @page = db.save({"_id" => params[:id], "_rev" => page._rev, 'title' => params[:title], 'body' => params[:body], 'template' => params[:template]})
   redirect '/pages'
 end
 

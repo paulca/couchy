@@ -1,6 +1,7 @@
 require 'hpricot'
 class TemplateMap
     attr_accessor :template, :record
+    
   def initialize(hash = {})
     self.template = hash[:template] if hash[:template]
     self.record = hash[:record] if hash[:record]
