@@ -4,12 +4,11 @@
 
 <form method="post" action="/page/<%= @page._id %>">
   <dl>
-    <dt>Title</dt>
-    <dd><input type="text" name="title" value="<%= @page.title %>"></dd>
-    <dt>Template</dt>
-    <dd><input type="text" name="template" value="<%= @page.template %>"></dd>
-    <dt>Body</dt>
-    <dd><textarea name="body"><%= @page.body %></textarea></dd>
+    <% @fields.each do |field| %>
+      <dt><%= field %></dt>
+      <dd><input type="text" name="<%= field %>" value="<%= @page.send(field) %>"></dd>
+    <% end %>
   </dl>
+  <input type="hidden" name="template" value="<%= @page.template %>"></input>
   <input type="submit" value="Save">
 </form>

@@ -22,7 +22,13 @@ end
 get '/pages/:id' do
   @page = OpenStruct.new(db.get(params[:id]))
   rio("templates/#{@page.template}") >> (template ||= "")
-  TemplateMap.new(:template => template, :record => {:body => @page.body, :title => @page.title}).parsed
+  template_map = TemplateMap.new(:template => template)
+  hash = {}
+  template_map.fields.each do |field|
+    hash[field.to_sym] = @page.send(field)
+  end
+  template_map.record = hash
+  template_map.parsed
 end
 
 get '/templates' do
@@ -32,12 +38,20 @@ end
 
 get '/edit/:id' do
   @page = OpenStruct.new(db.get(params[:id]))
+  rio("templates/#{@page.template}") >> (template ||= "")
+  @fields = TemplateMap.new(:template => template).fields
   erb :edit
 end
 
 post '/page/:id' do
   page = OpenStruct.new(db.get(params[:id]))
-  @page = db.save({"_id" => params[:id], "_rev" => page._rev, 'title' => params[:title], 'body' => params[:body], 'template' => params[:template]})
+  hash = {"_id" => params[:id], "_rev" => page._rev, 'template' => params[:template]}
+  rio("templates/#{params[:template]}") >> (template ||= "")
+  fields = TemplateMap.new(:template => template).fields
+  fields.each do |field|
+    hash[field] = params[field]
+  end
+  @page = db.save(hash)
   redirect '/pages'
 end
 
