@@ -3,3 +3,16 @@ Couchy
 Couchy is a simple frontend on top of CouchDB with the aim of allowing a designer to specify the schema of a CouchDB document using plain old html.
 
 Neat concept, huh?!
+
+So it works like this:
+
+Create a html file, let's say a mockup of a final design. Call it template.html.
+
+Run couchy (it's a little Sinatra page):
+
+ruby couchy.rb
+(fires up on port 4567, whoop!)
+
+Check out http://localhost:4567
+
+You'll see Pages and Templates
