@@ -2,7 +2,8 @@
 
 <p><%= @page.body %></p>
 
-<form method="post" action="/page/<%= @page._id %>">
+<form method="post" action="/pages/<%= @page._id %>">
+  <input type="hidden" name="_method" value="put">
   <dl>
     <% @fields.each do |field| %>
       <dt><%= field %></dt>

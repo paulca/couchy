@@ -43,7 +43,7 @@ get '/edit/:id' do
   erb :edit
 end
 
-post '/page/:id' do
+put '/pages/:id' do
   page = OpenStruct.new(db.get(params[:id]))
   hash = {"_id" => params[:id], "_rev" => page._rev, 'template' => params[:template]}
   rio("templates/#{params[:template]}") >> (template ||= "")
