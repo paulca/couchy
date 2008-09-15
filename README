@@ -6,13 +6,31 @@ Neat concept, huh?!
 
 So it works like this:
 
-Create a html file, let's say a mockup of a final design. Call it template.html.
+You start with a html file. Have a look at site/templates/demo_template.html ... See all those html tags with class="schema" ... Can you guess what it is yet?
 
-Run couchy (it's a little Sinatra page):
+Run couchy (it's a little Sinatra page ... you might need to install Sinatra (sudo gem install sinatra) ):
 
 ruby couchy.rb
 (fires up on port 4567, whoop!)
 
 Check out http://localhost:4567
 
+(you also need couchdb running on port 5984 with a database called 'couchy')
+
 You'll see Pages and Templates
+
+Pages -> This is where your pages will be. You've none at the start.
+
+Templates -> This is where you build your app.
+
+Click 'Templates'
+
+You'll see demo_template.html with a 'new' link beside it. Click 'new'
+
+Now you see what the class="schema" was doing? Save the form. You can now click in and see your page. Woop!
+
+Change demo_template.html. Add tags with class="schema". Put some back in. See what's happening? Magix!
+
+That's all it does for now.
+
+kthxbai
