@@ -1,0 +1,12 @@
+<h1>New page</h1>
+
+<form method="post" action="/pages">
+  <dl>
+    <% @fields.each do |field| %>
+      <dt><%= field %></dt>
+      <dd><input type="text" name="<%= field %>" value=""></dd>
+    <% end %>
+  </dl>
+  <input type="hidden" name="template" value="<%= params[:template] %>"></input>
+  <input type="submit" value="Save">
+</form>

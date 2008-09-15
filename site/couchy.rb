@@ -19,6 +19,24 @@ get '/pages' do
   erb :pages
 end
 
+get '/pages/new' do
+  rio("templates/#{params[:template]}") >> (template ||= "")
+  @fields = TemplateMap.new(:template => template).fields
+  erb :new
+end
+
+post '/pages' do
+  rio("templates/#{params[:template]}") >> (template ||= "")
+  fields = TemplateMap.new(:template => template).fields
+  hash = {:template => params[:template]}
+  fields.each do |field|
+    hash[field.to_sym] = params[field]
+  end
+  db.save(hash)
+  redirect '/pages'
+end
+
+
 get '/pages/:id' do
   @page = OpenStruct.new(db.get(params[:id]))
   rio("templates/#{@page.template}") >> (template ||= "")

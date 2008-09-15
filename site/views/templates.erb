@@ -5,7 +5,7 @@
 <% else %>
   <ul>
     <% @templates.each do |template| %>
-      <li><%= template.filename %></li>
+      <li><%= template.filename %> <a href="/pages/new?template=<%= template.filename %>">new</a></li>
     <% end %>
   </ul>
 <% end %>
